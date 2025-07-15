@@ -12,8 +12,6 @@ import { ProjectEpicView } from "@/components/project-epic-view"
 import { TaskProvider } from "@/components/task-context"
 import { SidebarInset } from "@/components/ui/sidebar"
 
-
-
 export default function Home() {
   const { user, loading: authLoading } = useAuthHook();
   const [activeView, setActiveView] = useState<"daily" | "projects">("daily")

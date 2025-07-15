@@ -9,8 +9,8 @@ const LoginForm: React.FC = () => {
     try {
       await signInWithPopup(auth, provider);
       alert("Signed in!");
-    } catch (error: any) {
-      alert("Google Sign-In failed: " + error.message);
+    } catch (error) {
+      alert("Google Sign-In failed: " + (error instanceof Error ? error.message : String(error)));
     }
   };
 

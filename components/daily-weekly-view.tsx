@@ -1,6 +1,8 @@
 "use client"
 
 import { useState } from "react"
+import useAuthHook from '../hooks/useAuth';
+import { useTaskContext } from "@/components/task-context"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Checkbox } from "@/components/ui/checkbox"
@@ -8,13 +10,13 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { CalendarDays, ChevronLeft, ChevronRight, Clock, Plus } from "lucide-react"
-import { useTaskContext } from "@/components/task-context"
 import { format, addDays, startOfWeek, isSameDay, parseISO } from "date-fns"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
 import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
 
 export function DailyWeeklyView() {
+  const { user } = useAuthHook();
   const { tasks, epics, updateTask, moveTask, addTask } = useTaskContext()
   const [currentDate, setCurrentDate] = useState(new Date())
   const [activeTab, setActiveTab] = useState("today")
@@ -30,7 +32,7 @@ export function DailyWeeklyView() {
     epicId: "",
     productTeam: "",
     priority: 1,
-    dueDate: format(today, "yyyy-MM-dd"),
+    dueDate: format(today, "yyyy-MM-dd")
   })
 
   const getTasksForDate = (date: Date) => {
@@ -72,7 +74,7 @@ export function DailyWeeklyView() {
   }
 
   const handleCreateTask = () => {
-    if (newTask.name && newTask.epicId && newTask.dueDate) {
+    if (user && newTask.name && newTask.epicId && newTask.dueDate) {
       addTask({
         name: newTask.name,
         dueDate: newTask.dueDate,
@@ -80,6 +82,7 @@ export function DailyWeeklyView() {
         productTeam: newTask.productTeam,
         status: "todo" as const,
         priority: newTask.priority,
+        userId: user.uid
       })
       setNewTask({
         name: "",
@@ -272,7 +275,7 @@ export function DailyWeeklyView() {
             </CardHeader>
             <CardContent>
               <div className="flex justify-between items-center mb-4">
-                <h3 className="font-medium">Today's Tasks</h3>
+                <h3 className="font-medium">Today&apos;s Tasks</h3>
                 <Dialog>
                   <DialogTrigger asChild>
                     <Button variant="outline" size="sm">
@@ -293,7 +296,7 @@ export function DailyWeeklyView() {
                           onKeyDown={(e) => {
                             if (e.key === "Enter") {
                               const taskName = e.currentTarget.value
-                              if (taskName && epics.length > 0) {
+                              if (user && taskName && epics.length > 0) {
                                 addTask({
                                   name: taskName,
                                   dueDate: format(today, "yyyy-MM-dd"),
@@ -301,6 +304,7 @@ export function DailyWeeklyView() {
                                   productTeam: epics[0].productTeam,
                                   status: "todo" as const,
                                   priority: 1,
+                                  userId: user.uid
                                 })
                                 e.currentTarget.value = ""
                               }
@@ -351,7 +355,7 @@ export function DailyWeeklyView() {
             </CardHeader>
             <CardContent>
               <div className="flex justify-between items-center mb-4">
-                <h3 className="font-medium">Tomorrow's Tasks</h3>
+                <h3 className="font-medium">Tomorrow&apos;s Tasks</h3>
                 <Dialog>
                   <DialogTrigger asChild>
                     <Button variant="outline" size="sm">
@@ -372,7 +376,7 @@ export function DailyWeeklyView() {
                           onKeyDown={(e) => {
                             if (e.key === "Enter") {
                               const taskName = e.currentTarget.value
-                              if (taskName && epics.length > 0) {
+                              if (user && taskName && epics.length > 0) {
                                 addTask({
                                   name: taskName,
                                   dueDate: format(tomorrow, "yyyy-MM-dd"),
@@ -380,6 +384,7 @@ export function DailyWeeklyView() {
                                   productTeam: epics[0].productTeam,
                                   status: "todo" as const,
                                   priority: 1,
+                                  userId: user.uid
                                 })
                                 e.currentTarget.value = ""
                               }
@@ -453,7 +458,7 @@ export function DailyWeeklyView() {
                                 onKeyDown={(e) => {
                                   if (e.key === "Enter") {
                                     const taskName = e.currentTarget.value
-                                    if (taskName && epics.length > 0) {
+                                    if (user && taskName && epics.length > 0) {
                                       addTask({
                                         name: taskName,
                                         dueDate: format(day, "yyyy-MM-dd"),
@@ -461,6 +466,7 @@ export function DailyWeeklyView() {
                                         productTeam: epics[0].productTeam,
                                         status: "todo" as const,
                                         priority: 1,
+                                        userId: user.uid
                                       })
                                       e.currentTarget.value = ""
                                     }
