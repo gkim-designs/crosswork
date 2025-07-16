@@ -8,7 +8,6 @@ const LoginForm: React.FC = () => {
     const provider = new GoogleAuthProvider();
     try {
       await signInWithPopup(auth, provider);
-      alert("Signed in!");
     } catch (error) {
       alert("Google Sign-In failed: " + (error instanceof Error ? error.message : String(error)));
     }
@@ -19,16 +18,16 @@ const LoginForm: React.FC = () => {
       <div className="max-w-md w-full space-y-8">
         <div>
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-            Sign in to your account
+            Let's get to work today ☀️
           </h2>
           <p className="mt-2 text-center text-sm text-gray-600">
-            Welcome back! Please sign in to continue.
+            A simple way to manage your tasks
           </p>
         </div>
         <div className="mt-8 space-y-6">
           <button
             onClick={handleGoogleLogin}
-            className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200"
+            className="group relative mx-auto flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-gray-950 hover:bg-gray-950 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200"
           >
             <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24">
               <path
