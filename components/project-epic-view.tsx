@@ -96,8 +96,7 @@ export function ProjectEpicView() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold">Projects & Epics</h1>
-          <p className="text-muted-foreground">Manage your epics and track progress</p>
+          <h2 className="text-xl font-bold">Projects & Epics</h2>
         </div>
         <div className="flex items-center gap-2">
           <Select value={selectedTeam} onValueChange={setSelectedTeam}>

@@ -1,6 +1,7 @@
 "use client"
 
-import { Calendar, FolderKanban, Home, Settings } from "lucide-react"
+import { Calendar, FolderKanban, Home, Settings, LogOut } from "lucide-react"
+import { logout } from "../lib/firebase"
 import {
   Sidebar,
   SidebarContent,
@@ -40,12 +41,10 @@ export function AppSidebar({ activeView, setActiveView }: AppSidebarProps) {
           <Home className="h-6 w-6 text-blue-600" />
           <h1 className="text-lg font-semibold">TaskFlow</h1>
         </div>
-        <p className="text-sm text-muted-foreground">Product Designer Dashboard</p>
       </SidebarHeader>
 
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>Navigation</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {menuItems.map((item) => (
@@ -64,9 +63,10 @@ export function AppSidebar({ activeView, setActiveView }: AppSidebarProps) {
       <SidebarFooter className="p-4">
         <SidebarMenu>
           <SidebarMenuItem>
-            <SidebarMenuButton>
+    
+            <SidebarMenuButton onClick={logout}>
               <Settings className="h-4 w-4" />
-              <span>Settings</span>
+              <span>Logout</span>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>

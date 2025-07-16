@@ -161,8 +161,7 @@ export function DailyWeeklyView() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold">Daily & Weekly Tasks</h1>
-          <p className="text-muted-foreground">Tasks organized by Epic</p>
+          <h2 className="text-xl font-bold">Daily tasks</h2>
         </div>
         <div className="flex items-center gap-2">
           <Dialog open={isTaskDialogOpen} onOpenChange={setIsTaskDialogOpen}>
@@ -268,14 +267,10 @@ export function DailyWeeklyView() {
         <TabsContent value="today" className="space-y-4">
           <Card>
             <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <CalendarDays className="h-5 w-5" />
-                Today - {format(today, "EEEE, MMMM d")}
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="flex justify-between items-center mb-4">
-                <h3 className="font-medium">Today&apos;s Tasks</h3>
+              <div className="flex items-center justify-between w-full">
+                <CardTitle className="flex items-center gap-2">
+                  ☀️ Today - {format(today, "EEEE, MMMM d")}
+                </CardTitle>
                 <Dialog>
                   <DialogTrigger asChild>
                     <Button variant="outline" size="sm">
@@ -334,6 +329,8 @@ export function DailyWeeklyView() {
                   </DialogContent>
                 </Dialog>
               </div>
+            </CardHeader>
+            <CardContent>
               {Object.keys(todayGrouped).length === 0 ? (
                 <p className="text-muted-foreground text-center py-8">No tasks scheduled for today</p>
               ) : (
@@ -349,13 +346,12 @@ export function DailyWeeklyView() {
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                <Clock className="h-5 w-5" />
-                Tomorrow - {format(tomorrow, "EEEE, MMMM d")}
+                ☀️ Tomorrow {format(tomorrow, "EEEE, MMMM d")}
               </CardTitle>
             </CardHeader>
             <CardContent>
               <div className="flex justify-between items-center mb-4">
-                <h3 className="font-medium">Tomorrow&apos;s Tasks</h3>
+                
                 <Dialog>
                   <DialogTrigger asChild>
                     <Button variant="outline" size="sm">
